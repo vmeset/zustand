@@ -8,6 +8,7 @@ function Users() {
   const users = useUsersStore(state => state.users)
   const addUser = useUsersStore(state => state.addUser)
 
+
   return (
     <div>
       <form onSubmit={e => {
@@ -19,6 +20,7 @@ function Users() {
           onChange={e => setUsername(e.target.value)}
         />
       </form>
+      testim
       {users.map(user => (
         <div key={user.id}>
           {user.username}
