@@ -7,8 +7,8 @@ export interface IUser {
 
 export interface IUsersStore {
   users: IUser[],
-  // error: String,
   addUser: (username: string) => void
+  fetchUsers: () => void
 }
 
 export const useUsersStore = create<IUsersStore>((set) => ({
@@ -26,5 +26,10 @@ export const useUsersStore = create<IUsersStore>((set) => ({
         }
       ]
     }
-  ))
+  )),
+  fetchUsers: async () => {
+    const result = await fetch('https://jsonplaceholder.typicode.com/users')
+    const json = await result.json() as IUser[]
+    set({users: json})
+  }
 }))

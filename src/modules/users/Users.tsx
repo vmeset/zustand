@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useUsersStore } from './usersStore'
+import React, { useEffect, useState } from 'react'
+import { IUser, useUsersStore } from './usersStore'
 
 function Users() {
 
@@ -7,8 +7,12 @@ function Users() {
 
   const users = useUsersStore(state => state.users)
   const addUser = useUsersStore(state => state.addUser)
+  const fetchUsers = useUsersStore(state => state.fetchUsers)
 
-
+  useEffect(() => {
+    fetchUsers()
+  }, [])
+  
   return (
     <div>
       <form onSubmit={e => {
@@ -20,7 +24,6 @@ function Users() {
           onChange={e => setUsername(e.target.value)}
         />
       </form>
-      testim
       {users.map(user => (
         <div key={user.id}>
           {user.username}
